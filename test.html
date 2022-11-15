@@ -3,11 +3,72 @@
   <head>
     <meta charset="utf-8">
     <title>Team web workshop named after barona siteverstausena</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style media="screen">
+  *{
+    margin:0;
+  }
+  body{
+    background:linear-gradient(yellow,cyan);
+    min-height: 100vh;
+    font-size: 20px;
+  }
+  main{
+    display:flex;
+    justify-content: center;
+    align-items: start;
+  }
+  article{
+    display:grid;
+    justify-content: center;
+    align-items: center;
+    width:900px;
+  }
+  aside{
+    width:100px;
+    display:grid;
+    position:sticky;
+    top:0;
+    justify-content: center;
+    align-items: start;
+  }
+  aside a{
+    color:white;
+    text-shadow: 1px 1px black;
+  }
+  @media(max-width:700px){
+    aside{
+      position:fixed;
+      top:10px;
+      display:inline;
+      width:300px;
+    }
+
+    aside li{
+      display:inline-block;
+      float:right;
+      margin-left: 3%;
+      background:green;
+      border-radius: 7px;
+    }
+  }
+
+  </style>
   </head>
   <body>
-<h1>Team</h1>
-<p>Эта страница на nodejs но без подключения к базе данных, если просто вытащить html файл и подключить его нодой. Вот такие дела, страница на node.js спешит на помшошь! Всегда требуется новые высоко квалифицированные программисты в “веб мастерскую имени барона сайтоверстаузена”, для написательства супер шикарного сайта на подобии линкедина.</p>
-<p>И цель написать мудульную систему через ноду с подключением к базе данных и созданием уникальных групп.</p>
-<a href='https://nasobe.ru/'>to home</a>
+    <main>
+      <article>
+        <h1>Team</h1>
+        <p>Эта страница на nodejs но без подключения к базе данных, если просто вытащить html файл и подключить его нодой. Вот такие дела, страница на node.js спешит на помшошь! Всегда требуется новые высоко квалифицированные программисты в “веб мастерскую имени барона сайтоверстаузена”, для написательства супер шикарного сайта на подобии линкедина.</p>
+        <p>И цель написать мудульную систему через ноду с подключением к базе данных и созданием уникальных групп.</p>
+        <a href='https://nasobe.ru/'>to home</a>
+        <!-- <input type="text" name="text" value="" id='inpOk'>
+        <button type="button" name="button">go</button> -->
+      </article>
+    </main>
   </body>
+  <script type="text/javascript">
+  // let window.twoText=document.getElementById('inpOk');
+
+  </script>
 </html>

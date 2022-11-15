@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>contact</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://nasobe.ru/blozhik/style.css" rel="stylesheet">
+    <link rel="icon" href="https://nasobe.ru/images/js.svg">
+    </head>
+    <body>
+    <main>
+      <article>
+        <h1>Contact</h1>
+      <p>my name is Amir</p>
+      <a href="tel:89528885656">tel:89528885656</a>
+      telegram, whatsap and phoneNumber ^_^
+      <img src='https://nasobe.ru/images/DSC_4858.JPG' alt="Веб программист" />
+      <p style='width:100T;max-width:900px; background:green;color:white;text-shadow:1px 1px black;text-align:center;border-radius:0 0 7px 7px;'>Click Flipping</p>
+      </article>
+      <aside>
+        <a href="https://fozzy.com/aff.php?aff=16418">
+          <picture>
+            <img src="https://nasobe.ru/images/fozzy/ssd-480x320.png" alt="фози быстрее быстрого">
+          </picture>
+        </a>
+        <ul>
+          <li><a href='/nodejs/'>Team</a></li>
+          <li><a href='/nodejs/about'>about</a></li>
+          <li><a href='/nodejs/contact'>contact</a></li>
+          <li><a href='/nodejs/list'>список постов</a></li>
+        </ul>
+      </aside>
+    </main>
+    </body>
+    <script type="text/javascript">
+      if(innerWidth<700){
+        console.log('<700');
+        document.querySelector('body > main:nth-child(1) > aside:nth-child(2) > a:nth-child(1) > picture:nth-child(1) > img:nth-child(1)').style.cssText=`display:none;`;
+      }
+    let nClick=+0;
+    const thePhoto=['https://nasobe.ru/images/4974.JPG','https://nasobe.ru/blozhik/img/beg/P11105-073330.jpg','https://nasobe.ru/blozhik/img/beg/P11111-132550.jpg','https://nasobe.ru/blozhik/img/beg/P11105-073330.jpg'];
+    console.log(thePhoto.length);
+    document.querySelector('img').addEventListener('click',()=>{
+      nClick++;
+      if(nClick>=thePhoto.length){
+        nClick=0;
+        console.log(thePhoto.length);
+      }
+      document.querySelector('img').setAttribute('src',thePhoto[nClick]);
+      // console.log('click in button!!!'+'_'+nClick);
+    })
+    // let links=document.createElement('ul');
+    // let linksTwo=document.createElement('ul');
+    // let linksThree=document.createElement('ul');
+    // let list=document.createElement('ul');
+    //
+    // document.querySelector('body > main > aside').append(links);
+    // document.querySelector('body > main > aside').append(linksTwo);
+    // document.querySelector('body > main > aside').append(linksThree);
+    // document.querySelector('body > main > aside').append(list);
+    // document.querySelector('body > main:nth-child(1) > aside:nth-child(2) > ul:nth-child(2) > li:nth-child(1) > a:nth-child(1)').innerHTML=`<li><a href='/nodejs/'>Team</a></li>`;
+    // document.querySelector('body > main:nth-child(1) > aside:nth-child(2) > ul:nth-child(2) > li:nth-child(2) > a:nth-child(1)').innerHTML=`<li><a href='/nodejs/about'>about</a></li>`;
+    // document.querySelector('body > main:nth-child(1) > aside:nth-child(2) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1)').innerHTML=`<li><a href='/nodejs/contact'>contact</a></li>`;
+    // document.querySelector('body > main:nth-child(1) > aside:nth-child(2) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1)').innerHTML=`<li><a href='/nodejs/list'>список постов</a></li>`;
+    </script>
+</html>

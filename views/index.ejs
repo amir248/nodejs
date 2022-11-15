@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%=title %></title>
+    <meta charset="utf-8" />
+    <link href="https://nasobe.ru/blozhik/style.css" rel="stylesheet">
+    <link rel="icon" href="https://nasobe.ru/images/js.svg">
+    <meta name='description' content='<%= description %>'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%- (json) %>
+    <link rel="canonical" href=https://nasobe.ru/nodejs/<%- url %>>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CTRLNMFNGY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-CTRLNMFNGY');
+    </script>
+</head>
+<body>
+  <main>
+    <article>
+      <h1><%= title %></h1>
+      <p><%- article %></p>
+      <p style="text-align:end;"><%= autor %></p>
+      <a href="https://nasobe.ru/nodejs/list">На главную BlozHikA</a>
+      <!-- <a href='/nodejs/list'>список постов</a> -->
+    </article>
+  </main>
+
+</body>
+<html>
