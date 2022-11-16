@@ -65,7 +65,7 @@ app.post('/nodejs/register', UrlencodedParser, function (
 
 // конфигурация
 const connection = mysql.createConnection({
-  host: 'localhost',
+  host: 'localhost:3306',
   user: 'debian-sys-maint',
   database: 'nasoberu_nasite',
   password: 'vmHrqP8Ixuf0fDGt'
