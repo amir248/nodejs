@@ -1,8 +1,8 @@
 *{
-  margin:0px;
+  margin:0;
 }
 body{
-  background:linear-gradient(rgba(255,255,0,0.3),rgba(0,0,255,0.3));
+  background:linear-gradient(yellow,cyan);
   min-height: 100vh;
   font-size: 20px;
 }
@@ -45,15 +45,9 @@ aside a{
     border-radius: 7px;
   }
 }
-img{
-  width:100%;
-  max-width: 900px;
-}
-#gl{
-  width:100%;
-  max-width: 512px;
-}
-article h1{
-  color:white;
-  text-shadow: 1px 1px black, 2px 2px 3px black, 3px 3px black;
+
+@media(min-width:700px){
+  body > main:nth-child(1) > aside:nth-child(2) > a:nth-child(1) > picture:nth-child(1) > img:nth-child(1){
+    display:none;
+  }
 }

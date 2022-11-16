@@ -12,7 +12,16 @@
     <main>
       <article>
         <h1><%= title %></h1>
-      <p><%= text %></p>
+      <p><%= article %></p>
+      <% if(titleVisible){ %>
+      <ul>
+          <% for(var i=0; i<title.length;i++) {%>
+              <li><%=title[i] %></li>
+          <%} %>
+      </ul>
+  <% }else {%>
+      <h3>адрес отсутствует</h3>
+  <%} %>
       </article>
       <aside>
         <a href="https://fozzy.com/aff.php?aff=16418">
@@ -21,13 +30,13 @@
           </picture>
         </a>
         <ul>
-          <li><a href='/nodejs/'>Team</a></li>
-          <li><a href='/nodejs/about'>about</a></li>
-          <li><a href='/nodejs/contact'>contact</a></li>
-          <li><a href='/nodejs/list'>список постов</a></li>
+          <li><a href='/new/'>Team</a></li>
+          <li><a href='/new/about'>about</a></li>
+          <li><a href='/new/contact'>contact</a></li>
+          <li><a href='/new/list'>список постов</a></li>
         </ul>
       </aside>
     </main>
     </body>
-    <script type="text/javascript" src='site/script.js'></script>
+    <!-- <script type="text/javascript" src='site/script.js'></script> -->
 </html>

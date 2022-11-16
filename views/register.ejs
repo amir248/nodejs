@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Регистрация</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="views/style.css" rel="stylesheet">
+    <link href="https://nasobe.ru/blozhik/style.css" rel="stylesheet">
+    <link rel="icon" href="https://nasobe.ru/images/js.svg">
+    <style media="screen">
+      fieldset:nth-child(7){
+        display:flex;
+        justify-content: space-around;
+      }
+      fieldset:nth-child(8){
+        display:flex;
+        justify-content: space-around;
+      }
+      label{
+        color:grey;
+        font-size:15px;
+      }
+    </style>
+  </head>
+  <body>
+  <main>
+    <article>
+
+      <form action="/new/register" method="post">
+        <fieldset>
+          <legend>Login</legend>
+          <!-- <label>login</label><br /> -->
+          <input type="text" name="login" placeholder="Login" /><br />
+        </fieldset>
+
+        <fieldset>
+          <legend>Password</legend>
+          <!-- <label>password</label><br /> -->
+          <input type="text" name="password" placeholder='enter-password'/><br />
+          <input type="text" name="password" placeholder="repeat-password"/><br />
+        </fieldset>
+
+        <fieldset>
+          <legend>Email</legend>
+          <label>Почта@</label><br />
+          <input type="text" name="email" placeholder="@mail"/><br /><br />
+        </fieldset>
+
+        <fieldset>
+          <legend>Name</legend>
+          <label>Имя</label><br />
+          <input type="text" name="Name" placeholder="Name"/><br /><br />
+        </fieldset>
+        <fieldset>
+          <legend>Lastame</legend>
+          <label>Фамилия</label><br />
+          <input type="text" name="Lastname" placeholder="Lastname"/><br /><br />
+        </fieldset>
+        <fieldset>
+          <legend>Age</legend>
+          <label>Возраст</label><br />
+          <input type="number" name="age" placeholder="age"/><br /><br />
+
+        </fieldset>
+
+
+        <fieldset>
+          <legend>floor</legend>
+          <label>пол</label><br />
+        <select type='select' name="floor">
+          <option value="ono">-</option>
+          <option value="man">man</option>
+          <option value="woman">woman</option>
+        </select>
+        </fieldset>
+
+        <fieldset>
+          <legend>blod_type</legend>
+          <label>гр.крови</label><br />
+          <select type="select" name="blod_type">
+          <option value="non">niznay</option>
+            <option value="0p">0+</option>
+            <option value="0m">0-</option>
+            <option value="Ap">A+</option>
+            <option value="Am">A-</option>
+            <option value="Bp">B+</option>
+            <option value="Bm">B-</option>
+            <option value="ABp">AB+</option>
+            <option value="ABm">AB-</option>
+          </select>
+        </fieldset>
+
+        <fieldset>
+          <legend>profession</legend>
+          <label>Профессия</label><br />
+          <input type="text" name="profession" placeholder="profession"/><br /><br />
+        </fieldset>
+
+        <fieldset>
+          <legend>having_children</legend>
+          <label>Children</label><br />
+          <input type="text" name="having_children" placeholder="children"/><br /><br />
+        </fieldset>
+
+        <fieldset>
+          <legend>marital_status</legend>
+          <label>marital_status</label><br />
+          <input type="text" name="marital_status" placeholder="$$$"/><br /><br />
+        </fieldset>
+
+        <fieldset>
+          <legend>hobby</legend>
+          <label>hobby</label><br />
+          <input type="text" name="hobby" placeholder="favourite buisness"/><br /><br />
+        </fieldset>
+
+        <fieldset>
+          <legend>edycation</legend>
+          <label>edycation</label><br />
+          <input type="text" name="edycation" placeholder="schooling"/><br /><br />
+        </fieldset>
+
+        <input type="submit" value="Отправить" />
+        <a href="login" style='font-size:15px;text-decoration:none;float:right;'>
+          <sup>back</sup>
+        </a>
+      </form>
+    </article>
+  </main>
+  </body>
+</html>

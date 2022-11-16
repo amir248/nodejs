@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>add users</title>
+    <title><%=title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/site/style.css" rel="stylesheet">
+    <link href="https://nasobe.ru/blozhik/style.css" rel="stylesheet">
+    <link rel="icon" href="https://nasobe.ru/images/js.svg">
+  </head>
+  <body>
+    <main>
+      <article>
+        <h1><%= title %></h1>
+        <p><%= article %></p>
+        <form action="/" method="post">
+          <fieldset>
+            <legend>Login</legend>
+            <label for="">ok</label>
+            <input type="text" name="login" value="login">
+            <input type="text" name="Name" value="Name">
+            <button type="button" name="button">to Go</button>
+          </fieldset>
+        </form>
+
+<script>
+// данные для отправки
+const user = "Tom";
+ 
+const xhr = new XMLHttpRequest();
+// POST-запрос к ресурсу /user
+xhr.open("POST", "addUser");
+ 
+// обработчик получения ответа сервера
+xhr.onload = () => {
+    if (xhr.status == 200) {
+        console.log(xhr.responseText);
+  // response.send(`${request.body.userName} - ${request.body.userlogin}`);
+    } else {
+  console.log("Server response: ", xhr.statusText);
+    }
+};
+xhr.send(user);     // отправляем значение user в методе send
+</script>
+      </article>
+    </main>
+  </body>
+</html>

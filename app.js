@@ -19,14 +19,14 @@ app.use(express.static(path.join(__dirname, 'views')));
 app.set('view engine', 'ejs');
 const UrlencodedParser = express.urlencoded({extended: false});
 
-app.use("/new/login", function(request, response){
+app.use("/nodejs/login", function(request, response){
  response.render('login', {
    title: `title`,
    article: `artilcle O_o`
  });
 });
 
-app.get('/new/register', UrlencodedParser, function (
+app.get('/nodejs/register', UrlencodedParser, function (
   request,
   response
 ) {
@@ -35,7 +35,7 @@ app.get('/new/register', UrlencodedParser, function (
     text: 'text'
   })
 })
-app.post('/new/register', UrlencodedParser, function (
+app.post('/nodejs/register', UrlencodedParser, function (
   request,
   response
 ) {
@@ -106,12 +106,12 @@ connection.query(sql, function(err, results) {
 // });
 // console.log(result['login']);
 // Add a new user
-app.post("/new/", UrlencodedParser, function (request, response) {
+app.post("/nodejs/", UrlencodedParser, function (request, response) {
     if(!request.body) return response.sendStatus(400);
     console.log(request.body);
     response.send(`${request.body.userName} - ${request.body.userlogin}`);
 });
- app.use("/new/adduser", function(request, response){
+ app.use("/nodejs/adduser", function(request, response){
   response.render('addUser', {
     title: `title`,
     article: `artilcle O_o`
@@ -148,7 +148,7 @@ connection.end(err=>{
 // создаем парсер для данных application/x-www-form-urlencoded
 const urlencodedParser = express.urlencoded({extended: false});
 
-app.get("/new/", function (request, response) {
+app.get("/nodejs/", function (request, response) {
     response.render("index",{
       title: 'title',
       email: 'email',
@@ -159,7 +159,7 @@ app.get("/new/", function (request, response) {
     });
     console.log('index');
 });
-app.use("/new/kontakt", function(request, response){
+app.use("/node/kontakt", function(request, response){
   response.render('contact', {
       title: 'Мои контакты',
       name: 'Amir',
