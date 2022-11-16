@@ -11,12 +11,10 @@ app.use(express.static(path.join(__dirname, 'views')));
 
 const connection = mysql.createConnection({
   host: 'localhost',
-  // user: 'nasoberu_nasite',
-  // database: 'nasoberu_nasite',
-  // password: 'gfhjkmgfhjkm'
   user: 'debian-sys-maint',
   database: 'nasoberu_nasite',
-  password: 'vmHrqP8Ixuf0fDGt'
+  password: 'vmHrqP8Ixuf0fDGt',
+  // port: 3000
 });
 connection.connect(err=>{
   if(err){
@@ -41,9 +39,9 @@ connection.query(query,(err,result,field)=>{
       app.use("/nodejs/"+result[oj]['url'], function (request, response) {
       const connection = mysql.createConnection({
         host: 'localhost',
-        user: 'nasoberu_nasite',
+        user: 'debian-sys-maint',
         database: 'nasoberu_nasite',
-        password: 'gfhjkmgfhjkm'
+        password: 'vmHrqP8Ixuf0fDGt'
       });
       // response.send("hello world");
 
