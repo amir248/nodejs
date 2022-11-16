@@ -2,10 +2,7 @@ const mysql=require('mysql');
 // конфигурация
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'nasoberu_nasite',
-  database: 'nasoberu_nasite',
-  password: 'gfhjkmgfhjkm'
+
 });
 connection.connect(err=>{
   if(err){
