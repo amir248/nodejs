@@ -9,7 +9,7 @@ const express = require("express");
 const app = express();
 const fs=require('fs');
 const path =require('path');
-const mysql=require('mysql');
+const mysql=require('mysql2');
 const bodyParser=require('body-parser');
 // const style=require('./site/style.css');
 
@@ -65,7 +65,7 @@ app.post('/nodejs/register', UrlencodedParser, function (
 
 // конфигурация
 const connection = mysql.createConnection({
-  host: 'localhost:3306',
+  host: 'localhost',
   user: 'debian-sys-maint',
   database: 'nasoberu_nasite',
   password: 'vmHrqP8Ixuf0fDGt'
@@ -190,7 +190,7 @@ app.get("/new/contact", function(request, response){
     response.sendFile(__dirname + "/site/contact.html");
 });
 // начинаем прослушивать подключения на 3000 порту
-app.listen(3000);
+app.listen(3003);
 
 // if (typeof(PhusionPassenger) !== 'undefined') {
 //     app.listen('passenger');
