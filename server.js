@@ -13,8 +13,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'debian-sys-maint',
   database: 'nasoberu_nasite',
-  password: 'vmHrqP8Ixuf0fDGt',
-  // port: 3000
+  password: 'vmHrqP8Ixuf0fDGt'
 });
 connection.connect(err=>{
   if(err){

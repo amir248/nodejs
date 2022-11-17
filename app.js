@@ -42,6 +42,40 @@ app.post('/nodejs/register', UrlencodedParser, function (
   if (!request.body) return response.sendStatus(400)
   console.log(request.body);
   console.log('oK');
+  // конфигурация
+  const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'debian-sys-maint',
+    database: 'nasoberu_nasite',
+    password: 'vmHrqP8Ixuf0fDGt'
+  });
+  connection.connect(err=>{
+    if(err){
+      return err;
+      console.log('err');
+    }else{
+      console.log('database--- oK');
+    }
+  });
+
+  let userList = "SELECT * FROM `barbarians`";
+
+  //Добовление записи, сработало!!!
+  //-------------------------------
+  const sql = `INSERT INTO barbarians(login, password, email, Name, Lastname, age, floor, blod_type, profession, having_children, marital_status, hobby, education) VALUES(${request.body.login}, 'password', ${request.body.email}, 'Amir', 'Navrutdinov', 35, 'her Baldysh', '4+', 'programmer', 'none', 'excellent', 'photography', 'programmer')`;
+
+  connection.query(sql, function(err, results) {
+    if(err) console.log(err);
+    console.log(results);
+  });
+  connection.end(err=>{
+    if(err){
+      return err;
+      console.log('err');
+    }else{
+      console.log('database--- closed');
+    }
+  });
   response.render('register0', {
     login: `${request.body.login}`,
     password: `${request.body.password}`,
@@ -55,7 +89,7 @@ app.post('/nodejs/register', UrlencodedParser, function (
     having_children: `${request.body.having_children}`,
     marital_status: `${request.body.marital_status}`,
     hobby: `${request.body.hobby}`,
-    education: `${request.body.education}`
+    education: `${request.body.edycation}`
   });
 })
 
@@ -63,32 +97,6 @@ app.post('/nodejs/register', UrlencodedParser, function (
 //   response.send('Главная страница')
 // })
 
-// конфигурация
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'debian-sys-maint',
-  database: 'nasoberu_nasite',
-  password: 'vmHrqP8Ixuf0fDGt'
-});
-connection.connect(err=>{
-  if(err){
-    return err;
-    console.log('err');
-  }else{
-    console.log('database--- oK');
-  }
-});
-
-let userList = "SELECT * FROM `barbarians`";
-
-//Добовление записи, сработало!!!
-//-------------------------------
-const sql = `INSERT INTO barbarians(login, password, email, Name, Lastname, age, floor, blod_type, profession, having_children, marital_status, hobby, education) VALUES("ChikChicly", 'password', 'chikchicy@gmail.com', 'Amir', 'Navrutdinov', 35, 'muzh', '4+', 'programmer', 'none', 'excellent', 'photography', 'programmer')`;
-
-connection.query(sql, function(err, results) {
-    if(err) console.log(err);
-    console.log(results);
-});
 //-------------------------------------
 
 // connection.query(userList,(err,result,field)=>{
@@ -118,14 +126,6 @@ app.post("/nodejs/", UrlencodedParser, function (request, response) {
   });
 });
 
-connection.end(err=>{
-  if(err){
-    return err;
-    console.log('err');
-  }else{
-    console.log('database--- closed');
-  }
-});
 //Napis
 // fs.readdir('thePhoto',(err,data)=>{
 //   // console.log(data);
