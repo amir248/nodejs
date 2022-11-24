@@ -1,9 +1,3 @@
-// if (typeof(PhusionPassenger) !== 'undefined') {
-//     PhusionPassenger.configure({ autoInstall: false });
-// }
-
-// import Foto from '/site/Amir.jpg';
-// подключение express
 const express = require("express");
 // создаем объект приложения
 const app = express();
@@ -14,19 +8,28 @@ const bodyParser=require('body-parser');
 // const style=require('./site/style.css');
 
 
+//Порт и пути для работы на всех машинах.
+const pathS='new';
+const port=3001;
+
+const hosT='localhost';
+const logiN='debian-sys-maint';
+const databasE='nasoberu_nasite';
+const passworD='vmHrqP8Ixuf0fDGt';
+
 
 app.use(express.static(path.join(__dirname, 'views')));
 app.set('view engine', 'ejs');
 const UrlencodedParser = express.urlencoded({extended: false});
 
-app.use("/nodejs/login", function(request, response){
+app.use("/"+`${pathS}`+"/login", function(request, response){
  response.render('login', {
    title: `title`,
    article: `artilcle O_o`
  });
 });
 
-app.get('/nodejs/register', UrlencodedParser, function (
+app.get('/'+`${pathS}`+'/register', UrlencodedParser, function (
   request,
   response
 ) {
@@ -34,8 +37,9 @@ app.get('/nodejs/register', UrlencodedParser, function (
     title: 'OK',
     text: 'text'
   })
-})
-app.post('/nodejs/register', UrlencodedParser, function (
+});
+
+app.post('/'+`${pathS}`+'/register', UrlencodedParser, function (
   request,
   response
 ) {
@@ -44,10 +48,10 @@ app.post('/nodejs/register', UrlencodedParser, function (
   console.log('oK');
   // конфигурация
   const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'debian-sys-maint',
-    database: 'nasoberu_nasite',
-    password: 'vmHrqP8Ixuf0fDGt'
+    host: hosT,
+    user: logiN,
+    database: databasE,
+    password: passworD
   });
   connection.connect(err=>{
     if(err){
@@ -60,9 +64,19 @@ app.post('/nodejs/register', UrlencodedParser, function (
 
   let userList = "SELECT * FROM `barbarians`";
 
+  if(request.body.Name===''){
+    console.log('^_^');
+    request.body.Name=''
+  }else if(request.body.Lastname===''){
+    request.body.Lastname='';
+  }else if(request.body.age===''){
+      request.body.age='';
+  }else{
+    console.log('Elser!!!');
+  }
   //Добовление записи, сработало!!!
   //-------------------------------
-  const sql = `INSERT INTO barbarians(login, password, email, Name, Lastname, age, floor, blod_type, profession, having_children, marital_status, hobby, education) VALUES(${request.body.login}, 'password', ${request.body.email}, 'Amir', 'Navrutdinov', 35, 'her Baldysh', '4+', 'programmer', 'none', 'excellent', 'photography', 'programmer')`;
+  const sql = `INSERT INTO barbarians(login, password, email, Name, Lastname, age, floor, blod_type, profession, having_children, marital_status, hobby, education) VALUES('${request.body.login}', '${request.body.password}', '${request.body.email}', '${request.body.Name}', '${request.body.Lastname}', ${request.body.age}, '${request.body.floor}', '${request.body.blod_type}', '${request.body.profession}', '${request.body.having_children}', '${request.body.marital_status}', '${request.body.hobby}', '${request.body.edycation}')`;
 
   connection.query(sql, function(err, results) {
     if(err) console.log(err);
@@ -91,7 +105,7 @@ app.post('/nodejs/register', UrlencodedParser, function (
     hobby: `${request.body.hobby}`,
     education: `${request.body.edycation}`
   });
-})
+});
 
 // app.get('/new/', function (request, response) {
 //   response.send('Главная страница')
@@ -114,12 +128,12 @@ app.post('/nodejs/register', UrlencodedParser, function (
 // });
 // console.log(result['login']);
 // Add a new user
-app.post("/nodejs/", UrlencodedParser, function (request, response) {
+app.post("/"+`${pathS}`+"/", UrlencodedParser, function (request, response) {
     if(!request.body) return response.sendStatus(400);
     console.log(request.body);
     response.send(`${request.body.userName} - ${request.body.userlogin}`);
 });
- app.use("/nodejs/adduser", function(request, response){
+ app.use("/"+`${pathS}`+"/adduser", function(request, response){
   response.render('addUser', {
     title: `title`,
     article: `artilcle O_o`
@@ -148,7 +162,7 @@ app.post("/nodejs/", UrlencodedParser, function (request, response) {
 // создаем парсер для данных application/x-www-form-urlencoded
 const urlencodedParser = express.urlencoded({extended: false});
 
-app.get("/nodejs/", function (request, response) {
+app.get("/"+`${pathS}`+"/", function (request, response) {
     response.render("index",{
       title: 'title',
       email: 'email',
@@ -159,7 +173,7 @@ app.get("/nodejs/", function (request, response) {
     });
     console.log('index');
 });
-app.use("/node/kontakt", function(request, response){
+app.use("/"+`${pathS}`+"/kontakt", function(request, response){
   response.render('contact', {
       title: 'Мои контакты',
       name: 'Amir',
@@ -173,7 +187,7 @@ app.use("/node/kontakt", function(request, response){
 //     console.log(request.body);
 //     response.send(`${request.body.userName} - ${request.body.userAge}`);
 // });
-app.use("/new/about", function(request, response){
+app.use("/"+`${pathS}`+"/about", function(request, response){
     response.render('about', {
       title: ['about','ok'],
       titleVisible: true,
@@ -185,12 +199,12 @@ app.use("/new/about", function(request, response){
 //     response.sendFile(__dirname + "/site/about.html");
 // });
 
-app.get("/new/contact", function(request, response){
+app.get("/"+`${pathS}`+"/contact", function(request, response){
 
     response.sendFile(__dirname + "/site/contact.html");
 });
 // начинаем прослушивать подключения на 3000 порту
-app.listen(3003);
+app.listen(port);
 
 // if (typeof(PhusionPassenger) !== 'undefined') {
 //     app.listen('passenger');

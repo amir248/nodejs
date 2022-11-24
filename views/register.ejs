@@ -2,12 +2,15 @@
 <html>
   <head>
     <title>Регистрация</title>
-    <!-- <meta charset="utf-8" /> -->
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="views/style.css" rel="stylesheet">
     <link href="https://nasobe.ru/blozhik/style.css" rel="stylesheet">
     <link rel="icon" href="https://nasobe.ru/images/js.svg">
     <style media="screen">
+    body{
+      min-height: 100vh;
+    }
       fieldset:nth-child(7){
         display:flex;
         justify-content: space-around;
@@ -26,7 +29,7 @@
   <main>
     <article>
 
-      <form action="/nodejs/register" method="post">
+      <form action="/new/register" method="post">
         <fieldset>
           <legend>Login</legend>
           <!-- <label>login</label><br /> -->
@@ -59,7 +62,7 @@
         <fieldset>
           <legend>Age</legend>
           <label>Возраст</label><br />
-          <input type="number" name="age" placeholder="age"/><br /><br />
+          <input type="number" name="age" placeholder="age" value="000">
 
         </fieldset>
 
@@ -78,7 +81,7 @@
           <legend>blod_type</legend>
           <label>гр.крови</label><br />
           <select type="select" name="blod_type">
-          <option value="non">niznay</option>
+          <option value="niznan">niznay</option>
             <option value="0p">0+</option>
             <option value="0m">0-</option>
             <option value="Ap">A+</option>
@@ -93,31 +96,31 @@
         <fieldset>
           <legend>profession</legend>
           <label>Профессия</label><br />
-          <input type="text" name="profession" placeholder="profession"/><br /><br />
+          <input type="text" name="profession" placeholder="profession" value='высококвалифицированный оболтус'>
         </fieldset>
 
         <fieldset>
           <legend>having_children</legend>
           <label>Children</label><br />
-          <input type="text" name="having_children" placeholder="children"/><br /><br />
+          <input type="text" name="having_children" placeholder="children" value='???'>
         </fieldset>
 
         <fieldset>
           <legend>marital_status</legend>
           <label>marital_status</label><br />
-          <input type="text" name="marital_status" placeholder="$$$"/><br /><br />
+          <input type="text" name="marital_status" placeholder="$$$" value="/">
         </fieldset>
 
         <fieldset>
           <legend>hobby</legend>
           <label>hobby</label><br />
-          <input type="text" name="hobby" placeholder="favourite buisness"/><br /><br />
+          <input type="text" name="hobby" placeholder="favourite buisness" value="-">
         </fieldset>
 
         <fieldset>
           <legend>edycation</legend>
           <label>edycation</label><br />
-          <input type="text" name="edycation" placeholder="schooling"/><br /><br />
+          <input type="text" name="edycation" placeholder="schooling" value="school_O_o_LOL_o_SH">
         </fieldset>
 
         <input type="submit" value="Отправить" />
