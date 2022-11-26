@@ -10,7 +10,7 @@ const bodyParser=require('body-parser');
 
 //Порт и пути для работы на всех машинах.
 const pathS='new';
-const port=3001;
+const port=3005;
 
 const hosT='localhost';
 const logiN='debian-sys-maint';
@@ -23,11 +23,120 @@ app.set('view engine', 'ejs');
 const UrlencodedParser = express.urlencoded({extended: false});
 
 app.use("/"+`${pathS}`+"/login", function(request, response){
- response.render('login', {
-   title: `title`,
-   article: `artilcle O_o`
- });
+  request,
+  response.render('login',{
+    login: 'login',
+    password: 'password'
+  })
+  console.log(request.body.login);
 });
+
+
+app.post("/new/login", UrlencodedParser, function (request, response) {
+    if(!request.body) return response.sendStatus(400);
+console.log('request');
+    console.log(request.body);
+    response.send(`${request.body.login} - ${request.body.password}`);
+console.log('response');
+});
+app.post("/"+`${pathS}`+"/login", UrlencodedParser, function (request, response) {
+    const connection = mysql.createConnection({
+      host: hosT,
+      user: logiN,
+      database: databasE,
+      password: passworD
+    });
+    connection.connect(err=>{
+      if(err){
+        return err;
+        console.log('err');
+      }else{
+        console.log('database--- oK');
+      }
+    });
+
+    //
+    // let userList = "SELECT * FROM `barbarians`";
+    // const sql = "INSERT FROM barbarians(login, Name) VALUES(?, ?)";
+    connection.query("SELECT * FROM barbarians",
+      function(err, results, fields) {
+    //     console.log(err);
+    //     console.log(results[7]['login']); // собственно данные
+    //     console.log(fields); // мета-данные полей
+      for(let oK=0;oK<results.length;oK++){
+        console.log(results[oK]['login']);
+        if(results[oK]['login']==='LOL'){
+          console.log('name Taken <-----------------------------------XXX');
+        }
+      };
+    });
+    connection.end(err=>{
+      if(err){
+        return err;
+        console.log('err');
+      }else{
+        console.log('database--- closed');
+      }
+    });
+
+
+    // console.log(request.body);
+    // response.send(`${request.body.login} - ${request.body.password}`);
+
+    response.render('login', {
+      login: `${request.body.login}`,
+      password: `${request.body.password}`,
+    });
+});
+
+// app.use("/"+`${pathS}`+"/login", function(request, response){
+//   const connection = mysql.createConnection({
+//     host: hosT,
+//     user: logiN,
+//     database: databasE,
+//     password: passworD
+//   });
+//   connection.connect(err=>{
+//     if(err){
+//       return err;
+//       console.log('err');
+//     }else{
+//       console.log('database--- oK');
+//     }
+//   });
+//
+//   //
+//   // let userList = "SELECT * FROM `barbarians`";
+//   // const sql = "INSERT FROM barbarians(login, Name) VALUES(?, ?)";
+//   connection.query("SELECT * FROM barbarians",
+//     function(err, results, fields) {
+//   //     console.log(err);
+//   //     console.log(results[7]['login']); // собственно данные
+//   //     console.log(fields); // мета-данные полей
+//     for(let oK=0;oK<results.length;oK++){
+//       console.log(results[oK]['login']);
+//       if(results[oK]['login']==='LOL'){
+//         console.log('name Taken <-----------------------------------XXX');
+//       }
+//     };
+//   });
+//   connection.end(err=>{
+//     if(err){
+//       return err;
+//       console.log('err');
+//     }else{
+//       console.log('database--- closed');
+//     }
+//   });
+//
+//
+//  response.render('login', {
+//    title: `oK`,
+//    article: `artilcle O_o`
+//  });
+// });//login!
+
+
 
 app.get('/'+`${pathS}`+'/register', UrlencodedParser, function (
   request,
@@ -43,9 +152,9 @@ app.post('/'+`${pathS}`+'/register', UrlencodedParser, function (
   request,
   response
 ) {
-  if (!request.body) return response.sendStatus(400)
-  console.log(request.body);
-  console.log('oK');
+  // if (!request.body) return response.sendStatus(400)
+  // console.log(request.body);
+  // console.log('oK');
   // конфигурация
   const connection = mysql.createConnection({
     host: hosT,

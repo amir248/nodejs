@@ -10,7 +10,10 @@ app.use(express.static(path.join(__dirname, 'views')));
 
 
 const connection = mysql.createConnection({
-
+  host: 'localhost',
+  user: 'debian-sys-maint',
+  database: 'nasoberu_nasite',
+  password: 'vmHrqP8Ixuf0fDGt'
 });
 connection.connect(err=>{
   if(err){
@@ -34,7 +37,10 @@ connection.query(query,(err,result,field)=>{
       app.set('view engine', 'ejs')
       app.use("/nodejs/"+result[oj]['url'], function (request, response) {
       const connection = mysql.createConnection({
-      
+        host: 'localhost',
+        user: 'debian-sys-maint',
+        database: 'nasoberu_nasite',
+        password: 'vmHrqP8Ixuf0fDGt'
       });
       // response.send("hello world");
 

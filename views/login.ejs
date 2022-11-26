@@ -17,18 +17,19 @@
   <body>
   <main>
     <article>
-
-      <form action="/nodejs/login" method="post">
+      <span><%= login %></span>
+      <p><%= password %></p>
+      <form action="/new/login" method="post">
         <fieldset>
           <legend>Login</legend>
           <!-- <label>login</label><br /> -->
-          <input type="text" name="login" placeholder="Login" /><br />
+          <input type="text" name="login" placeholder="Login" >
         </fieldset>
 
         <fieldset>
           <legend>Password</legend>
           <!-- <label>password</label><br /> -->
-          <input type="text" name="password" placeholder='password'/><br />
+          <input type="text" name="password" placeholder='password'>
         </fieldset>
 
         <input type="submit" value="авторизироваться" />
