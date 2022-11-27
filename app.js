@@ -10,13 +10,14 @@ const bodyParser=require('body-parser');
 
 //Порт и пути для работы на всех машинах.
 const pathS='new';
-const port=3005;
+const port=3007;
 
 const hosT='localhost';
 const logiN='debian-sys-maint';
 const databasE='nasoberu_nasite';
 const passworD='vmHrqP8Ixuf0fDGt';
 
+console.log(__dirname);
 
 app.use(express.static(path.join(__dirname, 'views')));
 app.set('view engine', 'ejs');
@@ -28,18 +29,72 @@ app.use("/"+`${pathS}`+"/login", function(request, response){
     login: 'login',
     password: 'password'
   })
-  console.log(request.body.login);
+  // console.log(request.body.login);
 });
 
 
-app.post("/new/login", UrlencodedParser, function (request, response) {
-    if(!request.body) return response.sendStatus(400);
-console.log('request');
-    console.log(request.body);
-    response.send(`${request.body.login} - ${request.body.password}`);
-console.log('response');
+app.post("/new/login0", UrlencodedParser, function (request, response) {
+    if(!request.body){
+      return response.sendStatus(400);
+    }else{
+      console.log('Увы ФыФ!');
+    }
+// console.log('request');
+//     console.log(request.body);
+const connection = mysql.createConnection({
+  host: hosT,
+  user: logiN,
+  database: databasE,
+  password: passworD
 });
-app.post("/"+`${pathS}`+"/login", UrlencodedParser, function (request, response) {
+let buttonUp;
+let her;
+let toResponse;
+let offResponse;
+connection.query("SELECT * FROM barbarians",
+  function(err, results, fields) {
+//     console.log(err);
+//     console.log(results[7]['login']); // собственно данные
+//     console.log(fields); // мета-данные полей
+  for(let oK=0;oK<results.length;oK++){
+    console.log(results[oK]['login']);
+    if(results[oK]['login']===`${request.body.login}`&&results[oK]['password']===`${request.body.password}`){
+      console.log('name Taken <-----------------------------------XXX');
+      buttonUp=true;
+    toResponse='vill so oK!!! then login and password'+`${request.body.login}`&&results[oK]['password']===`${request.body.password}`;
+      // if(!results[oK]['login']===`${request.body.login}`&&results[oK]['password']===`${request.body.password}`){
+      //   console.log('YYYYYYYYYYra!!!');
+      // }else{
+      //   toResponse='realy oK! but PASSWORD dont\'t workenS!!! ';
+      //
+      // }
+      // return console.log('Login YEST!!! '+toResponse);
+    }else if(results[oK]['login']===`${request.body.login}`){
+      console.log(buttonUp);
+      her='???';
+    }else{
+      console.log(buttonUp);
+      offResponse='unfortunately such a login does not exist! OFF!!';
+
+    }
+  };
+  if(buttonUp==true){
+    response.send(`${request.body.login} `+'-- '+toResponse+'\n <a href="/new/login">to return</a>');
+    console.log(buttonUp);
+  }else if(buttonUp==false){
+    response.send(`${request.body.login} `+'-- '+offResponse+'\n <a href="/new/login">to return</a>');
+    console.log(buttonUp);
+  }else{
+    response.send(`${request.body.login} `+'-- '+her+'\n <a href="/new/login">to return</a>');
+    console.log(buttonUp);
+  }
+});
+
+// ${request.body.password}
+// console.log('response');
+});
+
+app.post("/"+`${pathS}`+"/login0", UrlencodedParser, function (request, response) {
     const connection = mysql.createConnection({
       host: hosT,
       user: logiN,
@@ -89,52 +144,52 @@ app.post("/"+`${pathS}`+"/login", UrlencodedParser, function (request, response)
     });
 });
 
-// app.use("/"+`${pathS}`+"/login", function(request, response){
-//   const connection = mysql.createConnection({
-//     host: hosT,
-//     user: logiN,
-//     database: databasE,
-//     password: passworD
-//   });
-//   connection.connect(err=>{
-//     if(err){
-//       return err;
-//       console.log('err');
-//     }else{
-//       console.log('database--- oK');
-//     }
-//   });
-//
-//   //
-//   // let userList = "SELECT * FROM `barbarians`";
-//   // const sql = "INSERT FROM barbarians(login, Name) VALUES(?, ?)";
-//   connection.query("SELECT * FROM barbarians",
-//     function(err, results, fields) {
-//   //     console.log(err);
-//   //     console.log(results[7]['login']); // собственно данные
-//   //     console.log(fields); // мета-данные полей
-//     for(let oK=0;oK<results.length;oK++){
-//       console.log(results[oK]['login']);
-//       if(results[oK]['login']==='LOL'){
-//         console.log('name Taken <-----------------------------------XXX');
-//       }
-//     };
-//   });
-//   connection.end(err=>{
-//     if(err){
-//       return err;
-//       console.log('err');
-//     }else{
-//       console.log('database--- closed');
-//     }
-//   });
-//
-//
-//  response.render('login', {
-//    title: `oK`,
-//    article: `artilcle O_o`
-//  });
-// });//login!
+app.use("/"+`${pathS}`+"/login", function(request, response){
+  const connection = mysql.createConnection({
+    host: hosT,
+    user: logiN,
+    database: databasE,
+    password: passworD
+  });
+  connection.connect(err=>{
+    if(err){
+      return err;
+      console.log('err');
+    }else{
+      console.log('database--- oK');
+    }
+  });
+
+  //
+  // let userList = "SELECT * FROM `barbarians`";
+  // const sql = "INSERT FROM barbarians(login, Name) VALUES(?, ?)";
+  connection.query("SELECT * FROM barbarians",
+    function(err, results, fields) {
+  //     console.log(err);
+  //     console.log(results[7]['login']); // собственно данные
+  //     console.log(fields); // мета-данные полей
+    for(let oK=0;oK<results.length;oK++){
+      console.log(results[oK]['login']);
+      if(results[oK]['login']==='LOL'){
+        console.log('name Taken <-----------------------------------XXX');
+      }
+    };
+  });
+  connection.end(err=>{
+    if(err){
+      return err;
+      console.log('err');
+    }else{
+      console.log('database--- closed');
+    }
+  });
+
+
+ response.render('login0', {
+   login: `LOL`,
+   password: `artilcle O_o`
+ });
+});//login!
 
 
 

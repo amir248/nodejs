@@ -4,7 +4,7 @@
     <meta charset="utf-8">
       <title><%=title %></title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link href="/site/style.css" rel="stylesheet">
+      <!-- <link href="/site/style.css" rel="stylesheet"> -->
       <link href="https://nasobe.ru/blozhik/style.css" rel="stylesheet">
       <link rel="icon" href="https://nasobe.ru/images/js.svg">
     </head>
@@ -29,5 +29,12 @@
       </aside>
     </main>
     </body>
+    <script type="text/javascript">
+      if(location.pathname=='new'){
+        console.log('pathname new');
+      }else if(location.pathname=='nodejs'){
+        console.log('nodejs');
+      }
+    </script>
     <script type="text/javascript" src='site/script.js'></script>
 </html>
