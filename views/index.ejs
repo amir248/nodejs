@@ -2,42 +2,25 @@
 <html>
 <head>
     <title><%=title %></title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
+    <link href="https://nasobe.ru/blozhik/style.css" rel="stylesheet">
+    <meta name='description' content='<%= description %>'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="views/style.css" rel="stylesheet">
-
+    <%- (json) %>
+    <link rel="icon" href="https://nasobe.ru/images/js.svg">
+    <link rel="canonical" href=https://nasobe.ru/nodejs/<%- url %>>
 </head>
 <body>
   <main>
     <article>
-      <h1><%=title %> в EJS</h1>
-
-      <% if(emailsVisible) {%>
-        <h3>Электронные адреса</h3>
-        <ul>
-          <% for(var i=0; i<emails.length;i++) {%>
-            <li><%=emails[i] %></li>
-            <%} %>
-          </ul>
-          <% }else {%>
-            <h3>Электронный адрес отсутствует</h3>
-            <%} %>
-            <p>Телефон: <%=phone %></p>
-
+      <h1><%= title %></h1>
+      <p><%- article %></p>
+      <p style="text-align:end;"><%= autor %></p>
+      <a href="https://nasobe.ru/nodejs/list"></a>
     </article>
-    <aside>
-      <a href="https://fozzy.com/aff.php?aff=16418">
-        <picture>
-          <img src="https://nasobe.ru/images/fozzy/ssd-480x320.png" alt="фози быстрее быстрого">
-        </picture>
-      </a>
-      <ul>
-        <li><a href='/nodejs/'>Team</a></li>
-        <li><a href='/nodejs/about'>about</a></li>
-        <li><a href='/nodejs/contact'>contact</a></li>
-        <li><a href='/nodejs/list'>список постов</a></li>
-      </ul>
-    </aside>
   </main>
+  <!-- <picture>
+    <img src="https://nasobe.ru/images/fozzy/ssd-480x320.png" alt="фози быстрее быстрого">
+  </picture> -->
 </body>
 <html>

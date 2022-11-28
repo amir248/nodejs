@@ -10,7 +10,7 @@ const bodyParser=require('body-parser');
 
 //Порт и пути для работы на всех машинах.
 const pathS='new';
-const port=3007;
+const port=3001;
 
 const hosT='localhost';
 const logiN='debian-sys-maint';
@@ -26,7 +26,7 @@ const UrlencodedParser = express.urlencoded({extended: false});
 app.use("/"+`${pathS}`+"/login", function(request, response){
   request,
   response.render('login',{
-    login: 'login',
+    login: 'lol',
     password: 'password'
   })
   // console.log(request.body.login);
@@ -71,7 +71,7 @@ connection.query("SELECT * FROM barbarians",
       // return console.log('Login YEST!!! '+toResponse);
     }else if(results[oK]['login']===`${request.body.login}`){
       console.log(buttonUp);
-      her='???';
+      her='password not guten';
     }else{
       console.log(buttonUp);
       offResponse='unfortunately such a login does not exist! OFF!!';
@@ -79,13 +79,13 @@ connection.query("SELECT * FROM barbarians",
     }
   };
   if(buttonUp==true){
-    response.send(`${request.body.login} `+'-- '+toResponse+'\n <a href="/new/login">to return</a>');
+    response.send(`${request.body.login} `+'-- '+toResponse+'\n <a href="/new/login">to return1</a>');
     console.log(buttonUp);
   }else if(buttonUp==false){
-    response.send(`${request.body.login} `+'-- '+offResponse+'\n <a href="/new/login">to return</a>');
+    response.send(`${request.body.login} `+'-- '+offResponse+'\n <a href="/new/login">to return2</a>');
     console.log(buttonUp);
   }else{
-    response.send(`${request.body.login} `+'-- '+her+'\n <a href="/new/login">to return</a>');
+    response.send(`${request.body.login} `+'-- '+her+'\n <a href="/new/login">to return3</a>');
     console.log(buttonUp);
   }
 });
@@ -271,6 +271,7 @@ app.post('/'+`${pathS}`+'/register', UrlencodedParser, function (
   });
 });
 
+
 // app.get('/new/', function (request, response) {
 //   response.send('Главная страница')
 // })
@@ -320,14 +321,55 @@ app.post("/"+`${pathS}`+"/", UrlencodedParser, function (request, response) {
 //     if(err) console.log(err);
 //   });
 // }
+const connection = mysql.createConnection({
+  host: hosT,
+  user: logiN,
+  database: databasE,
+  password: passworD
+});
+connection.connect(err=>{
+  if(err){
+    return err;
+    console.log('err');
+  }else{
+    console.log('database--- oK');
+  }
+});
+const sql = `SELECT * FROM article`;
+ 
+connection.query(sql, function(err, results) {
+    if(err) console.log(err);
+    console.log(results);
+for(let oj=0;oj<results.length;oj++){
+  app.use("/"+`${pathS}`+"/"+`${results[oj]['url']}`, function(request, response){
+    response.render('index', {
+      title: `${results[oj]['title']}`,
+      description: `${results[oj]['description']}`,
+      article: `${results[oj]['text']}`,
+      autor: `${results[oj]['autor']}`,
+      url: `${results[oj]['url']}`,
+      json: `${results[oj]['JSON']}`,
+      id: `${results[oj]['id']}`
+    });
+  });
+}//for
 
+});//connection
+connection.end(err=>{
+  if(err){
+    return err;
+    console.log('err');
+  }else{
+    console.log('database--- closed');
+  }
+});//closed-connection
 
 // определяем обработчик для маршрута "/"
 // создаем парсер для данных application/x-www-form-urlencoded
-const urlencodedParser = express.urlencoded({extended: false});
+// const urlencodedParser = express.urlencoded({extended: false});
 
 app.get("/"+`${pathS}`+"/", function (request, response) {
-    response.render("index",{
+    response.render("page",{
       title: 'title',
       email: 'email',
       text: 'text',
