@@ -12,16 +12,20 @@
     <main>
       <article>
         <h1><%= title %></h1>
-      <p><%= article %></p>
+      <p><%= backstory %></p>
       <% if(titleVisible){ %>
       <ul>
           <% for(var i=0; i<title.length;i++) {%>
-              <li><%=title[i] %></li>
+              <h2><%=title[i] %></h2>
+              <li><%= article[i] %></li>
           <%} %>
       </ul>
   <% }else {%>
       <h3>адрес отсутствует</h3>
   <%} %>
+   <strong>
+GITHAB: <a href='https://github.com/amir248/nodejs'>githab.com/amir248/nodejs</a>
+   </strong>
       </article>
       <aside>
         <a href="https://fozzy.com/aff.php?aff=16418">
