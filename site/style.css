@@ -1,5 +1,5 @@
 *{
-  margin:70px;
+  margin:0px;
 }
 body{
   background:linear-gradient(rgba(255,255,0,0.3),rgba(0,0,255,0.3));
@@ -10,15 +10,17 @@ main{
   display:flex;
   justify-content: center;
   align-items: start;
+  width:100%;
 }
 article{
   display:grid;
   justify-content: center;
   align-items: center;
-  width:900px;
+  max-width:900px;
+  width:100%;
 }
 aside{
-  width:100px;
+  width:200px;
   display:grid;
   position:sticky;
   top:0;
@@ -48,6 +50,7 @@ aside a{
 img{
   width:100%;
   max-width: 900px;
+  min-width: 200px;
 }
 #gl{
   width:100%;
@@ -56,4 +59,14 @@ img{
 article h1{
   color:white;
   text-shadow: 1px 1px black, 2px 2px 3px black, 3px 3px black;
+}
+picture{
+  width:100%;
+  max-width: 900px;
+}
+
+@media(max-width:700px){
+  body > main:nth-child(1) > aside:nth-child(2) > a:nth-child(1) > picture:nth-child(1) > img:nth-child(1){
+    display:none;
+  }
 }

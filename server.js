@@ -1,19 +1,335 @@
 const express = require("express");
+// создаем объект приложения
 const app = express();
-const mysql=require('mysql');
-const path=require('path');
+const fs=require('fs');
+const path =require('path');
+const mysql=require('mysql2');
+const bodyParser=require('body-parser');
+// const style=require('./site/style.css');
 
 
-// const urlencodedParser = express.urlencoded({extended: false});
+//Порт и пути для работы на всех машинах.
+const pathS='nodejs';
+const port=3003;
+
+const hosT='localhost';
+const logiN='debian-sys-maint';
+const databasE='nasoberu_nasite';
+const passworD='vmHrqP8Ixuf0fDGt';
+
+// debian-sys-maint',
+// database: 'nasoberu_nasite',
+// password: 'vmHrqP8Ixuf0fDGt
+
+console.log(__dirname);
 
 app.use(express.static(path.join(__dirname, 'views')));
+app.set('view engine', 'ejs');
+const UrlencodedParser = express.urlencoded({extended: false});
+
+app.use("/"+`${pathS}`+"/login", function(request, response){
+  request,
+  response.render('login',{
+    login: 'lol',
+    password: 'password'
+  })
+  // console.log(request.body.login);
+});
 
 
+app.post("/"+`${pathS}`+"/login0", UrlencodedParser, function (request, response) {
+    if(!request.body){
+      return response.sendStatus(400);
+    }else{
+      console.log('Увы ФыФ!');
+    }
+// console.log('request');
+//     console.log(request.body);
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'debian-sys-maint',
-  database: 'nasoberu_nasite',
-  password: 'vmHrqP8Ixuf0fDGt'
+  host: hosT,
+  user: logiN,
+  database: databasE,
+  password: passworD
+});
+let buttonUp;
+let her;
+let toResponse;
+let offResponse;
+connection.query("SELECT * FROM barbarians",
+  function(err, results, fields) {
+//     console.log(err);
+//     console.log(results[7]['login']); // собственно данные
+//     console.log(fields); // мета-данные полей
+  for(let oK=0;oK<results.length;oK++){
+    console.log(results[oK]['login']);
+    if(results[oK]['login']===`${request.body.login}`&&results[oK]['password']===`${request.body.password}`){
+      console.log('name Taken <-----------------------------------XXX');
+      buttonUp=true;
+    toResponse='vill so oK!!! then login and password'+`${request.body.login}`&&results[oK]['password']===`${request.body.password}`;
+      // if(!results[oK]['login']===`${request.body.login}`&&results[oK]['password']===`${request.body.password}`){
+      //   console.log('YYYYYYYYYYra!!!');
+      // }else{
+      //   toResponse='realy oK! but PASSWORD dont\'t workenS!!! ';
+      //
+      // }
+      // return console.log('Login YEST!!! '+toResponse);
+    }else if(results[oK]['login']===`${request.body.login}`){
+      console.log(buttonUp);
+      her='password not guten';
+    }else{
+      console.log(buttonUp);
+      offResponse='unfortunately such a login does not exist! OFF!!';
+
+    }
+  };
+  if(buttonUp==true){
+    response.send(`${request.body.login} `+'-- '+toResponse+'\n <a href="/new/login">to return1</a>');
+    console.log(buttonUp);
+  }else if(buttonUp==false){
+    response.send(`${request.body.login} `+'-- '+offResponse+'\n <a href="/new/login">to return2</a>');
+    console.log(buttonUp);
+  }else{
+    response.send(`${request.body.login} `+'-- '+her+'\n <a href="/new/login">to return3</a>');
+    console.log(buttonUp);
+  }
+});
+
+// ${request.body.password}
+// console.log('response');
+});
+
+app.post("/"+`${pathS}`+"/login0", UrlencodedParser, function (request, response) {
+    const connection = mysql.createConnection({
+      host: hosT,
+      user: logiN,
+      database: databasE,
+      password: passworD
+    });
+    connection.connect(err=>{
+      if(err){
+        return err;
+        console.log('err');
+      }else{
+        console.log('database--- oK');
+      }
+    });
+
+    //
+    // let userList = "SELECT * FROM `barbarians`";
+    // const sql = "INSERT FROM barbarians(login, Name) VALUES(?, ?)";
+    connection.query("SELECT * FROM barbarians",
+      function(err, results, fields) {
+    //     console.log(err);
+    //     console.log(results[7]['login']); // собственно данные
+    //     console.log(fields); // мета-данные полей
+      for(let oK=0;oK<results.length;oK++){
+        console.log(results[oK]['login']);
+        if(results[oK]['login']==='LOL'){
+          console.log('name Taken <-----------------------------------XXX');
+        }
+      };
+    });
+    connection.end(err=>{
+      if(err){
+        return err;
+        console.log('err');
+      }else{
+        console.log('database--- closed');
+      }
+    });
+
+
+    // console.log(request.body);
+    // response.send(`${request.body.login} - ${request.body.password}`);
+
+    response.render('login', {
+      login: `${request.body.login}`,
+      password: `${request.body.password}`,
+    });
+});
+
+app.use("/"+`${pathS}`+"/login", function(request, response){
+  const connection = mysql.createConnection({
+    host: hosT,
+    user: logiN,
+    database: databasE,
+    password: passworD
+  });
+  connection.connect(err=>{
+    if(err){
+      return err;
+      console.log('err');
+    }else{
+      console.log('database--- oK');
+    }
+  });
+
+  //
+  // let userList = "SELECT * FROM `barbarians`";
+  // const sql = "INSERT FROM barbarians(login, Name) VALUES(?, ?)";
+  connection.query("SELECT * FROM barbarians",
+    function(err, results, fields) {
+  //     console.log(err);
+  //     console.log(results[7]['login']); // собственно данные
+  //     console.log(fields); // мета-данные полей
+    for(let oK=0;oK<results.length;oK++){
+      console.log(results[oK]['login']);
+      if(results[oK]['login']==='LOL'){
+        console.log('name Taken <-----------------------------------XXX');
+      }
+    };
+  });
+  connection.end(err=>{
+    if(err){
+      return err;
+      console.log('err');
+    }else{
+      console.log('database--- closed');
+    }
+  });
+
+
+ response.render('login0', {
+   login: `LOL`,
+   password: `artilcle O_o`
+ });
+});//login!
+
+
+
+app.get('/'+`${pathS}`+'/register', UrlencodedParser, function (
+  request,
+  response
+) {
+  response.render('register',{
+    title: 'OK',
+    text: 'text'
+  })
+});
+
+app.post('/'+`${pathS}`+'/register', UrlencodedParser, function (
+  request,
+  response
+) {
+  // if (!request.body) return response.sendStatus(400)
+  // console.log(request.body);
+  // console.log('oK');
+  // конфигурация
+  const connection = mysql.createConnection({
+    host: hosT,
+    user: logiN,
+    database: databasE,
+    password: passworD
+  });
+  connection.connect(err=>{
+    if(err){
+      return err;
+      console.log('err');
+    }else{
+      console.log('database--- oK');
+    }
+  });
+
+  let userList = "SELECT * FROM `barbarians`";
+
+  if(request.body.Name===''){
+    console.log('^_^');
+    request.body.Name=''
+  }else if(request.body.Lastname===''){
+    request.body.Lastname='';
+  }else if(request.body.age===''){
+      request.body.age='';
+  }else{
+    console.log('Elser!!!');
+  }
+  //Добовление записи, сработало!!!
+  //-------------------------------
+  const sql = `INSERT INTO barbarians(login, password, email, Name, Lastname, age, floor, blod_type, profession, having_children, marital_status, hobby, education) VALUES('${request.body.login}', '${request.body.password}', '${request.body.email}', '${request.body.Name}', '${request.body.Lastname}', ${request.body.age}, '${request.body.floor}', '${request.body.blod_type}', '${request.body.profession}', '${request.body.having_children}', '${request.body.marital_status}', '${request.body.hobby}', '${request.body.edycation}')`;
+
+  connection.query(sql, function(err, results) {
+    if(err) console.log(err);
+    console.log(results);
+  });
+  // connection.end(err=>{
+  //   if(err){
+  //     return err;
+  //     console.log('err');
+  //   }else{
+  //     console.log('database--- closed');
+  //   }
+  // });
+  response.render('register0', {
+    login: `${request.body.login}`,
+    password: `${request.body.password}`,
+    email: `${request.body.email}`,
+    Name: `${request.body.Name}`,
+    Lastname: `${request.body.Lastname}`,
+    age: `${request.body.age}`,
+    floor: `${request.body.floor}`,
+    blod_type: `${request.body.blod_type}`,
+    profession: `${request.body.profession}`,
+    having_children: `${request.body.having_children}`,
+    marital_status: `${request.body.marital_status}`,
+    hobby: `${request.body.hobby}`,
+    education: `${request.body.edycation}`
+  });
+});
+
+
+// app.get('/new/', function (request, response) {
+//   response.send('Главная страница')
+// })
+
+//-------------------------------------
+
+// connection.query(userList,(err,result,field)=>{
+//   console.log(result[3]);
+//   response.render('users', {
+//       title: `${result[3]['name']}`,
+//       article: `${result[3]['text']}`
+//   })
+// });
+// app.use("/new/users", function(request, response){
+//   response.render('users', {
+//     title: `${result[3]['title']}`,
+//     article: `${result[3]['text']}`
+//   });
+// });
+// console.log(result['login']);
+// Add a new user
+app.post("/"+`${pathS}`+"/", UrlencodedParser, function (request, response) {
+    if(!request.body) return response.sendStatus(400);
+    console.log(request.body);
+    response.send(`${request.body.userName} - ${request.body.userlogin}`);
+});
+ app.use("/"+`${pathS}`+"/adduser", function(request, response){
+  response.render('addUser', {
+    title: `title`,
+    article: `artilcle O_o`
+  });
+});
+
+//Napis
+// fs.readdir('thePhoto',(err,data)=>{
+//   // console.log(data);
+//   data.forEach(file=>{
+//     console.log(file+" "+path.extname(file));
+//     // console.log(fs.statSync('thePhoto'/+file));
+//   });
+// });
+// // AhhhtunG!
+// let txt = 'oK2';
+// for(let oj=0;oj<9;oj++){
+//   console.log(oj);
+//   fs.writeFile('talk.json', 'oKi'+[oj], (err)=>{
+//     if(err) console.log(err);
+//   });
+// }
+const connection = mysql.createConnection({
+  host: hosT,
+  user: logiN,
+  database: databasE,
+  password: passworD
 });
 connection.connect(err=>{
   if(err){
@@ -23,48 +339,96 @@ connection.connect(err=>{
     console.log('database--- oK');
   }
 });
+const sql = `SELECT * FROM article`;
+ 
+connection.query(sql, function(err, results) {
+    if(err) console.log(err);
+    console.log(results[1]['title']);
+for(let oj=0;oj<results.length;oj++){
+  app.use("/"+`${pathS}`+"/"+`${results[oj]['url']}`, function(request, response){
+    response.render('index', {
+      title: `${results[oj]['title']}`,
+      description: `${results[oj]['description']}`,
+      article: `${results[oj]['text']}`,
+      autor: `${results[oj]['autor']}`,
+      url: `${results[oj]['url']}`,
+      json: `${results[oj]['JSON']}`,
+      id: `${results[oj]['id']}`
+    });
+  });
+}//for
 
-let query = "SELECT * FROM `article`";
-//----------------------------------------------
-// ------------oprava--`_`----------------------
-//----------------------------------------------
+});//connection
+// connection.end(err=>{
+//   if(err){
+//     return err;
+//     console.log('err');
+//   }else{
+//     console.log('database--- closed');
+//   }
+// });//closed-connection
 
-connection.query(query,(err,result,field)=>{
-  for(let oj=0;oj<result.length;oj++){
-    console.log(result[oj]['url']);
-    // получение списка
-    // app.get("/nodejs/"+result[oj]['url'], function(request, response){
-      app.set('view engine', 'ejs')
-      app.use("/nodejs/"+result[oj]['url'], function (request, response) {
-      const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'debian-sys-maint',
-        database: 'nasoberu_nasite',
-        password: 'vmHrqP8Ixuf0fDGt'
-      });
-      // response.send("hello world");
+app.get("/"+`${pathS}`+"/", function (request, response) {
+    response.render("page",{
+      title: 'title',
+      email: 'email',
+      text: 'text',
+      emailsVisible: true,
+      emails: ['nasoberu@nasobe.ru', 'chikchicly@gmail.com'],
+      phone: '+79528885656'
+    });
+    console.log('index');
+});//Важная страница! IMPORTANT
 
-      connection.connect(err=>{
-        if(err) throw err;
-        console.log('database--- oK');
-        // response.send('connection oK!');
-      });
 
-      let conbd = "SELECT * FROM `article`";
-      connection.query(conbd,(err,result,field)=>{
-        response.render('index', {
-          title: `${result[oj]['title']}`,
-          description: `${result[oj]['description']}`,
-          article: `${result[oj]['text']}`,
-          autor: `${result[oj]['autor']}`,
-          url: `${result[oj]['url']}`,
-          json: `${result[oj]['JSON']}`,
-          id: `${result[oj]['id']}`
-        })
-      });
 
-      app.use("/nodejs/list", function(request, response){
+
+app.use("/"+`${pathS}`+"/kontakt", function(request, response){
+  response.render('contact', {
+      title: 'Мои контакты',
+      name: 'Amir',
+      emailsVisible: true,
+      emails: ['nasoberu@nasobe.ru', 'chikchicy@gmail.com'],
+      phone: '+79528885656',
+    })
+});
+// app.post("/new/", urlencodedParser, function (request, response) {
+//     if(!request.body) return response.sendStatus(400);
+//     console.log(request.body);
+//     response.send(`${request.body.userName} - ${request.body.userAge}`);
+// });
+app.use("/"+`${pathS}`+"/about", function(request, response){
+    response.render('about', {
+      title: ['about','ok'],
+      titleVisible: true,
+      article: 'article',
+      name: "namE"
+    });
+});
+// app.get("/new/about", function(request, response){
+//     response.sendFile(__dirname + "/site/about.html");
+// });
+
+app.get("/"+`${pathS}`+"/contact", function(request, response){
+
+    response.sendFile(__dirname + "/site/contact.html");
+});
+
+let okcap = "SELECT * FROM `article`";
+connection.query(okcap, function(err, result) {
+    if(err) console.log(err);
+
+  for(let oj=0;oj<=result.length;oj++){
+    // console.log(result[oj]['title']);
+  // console.log(rows.title);
+    // console.log(rows['title'][oj]);
+  // }
+      app.use("/"+`${pathS}`+"/list", function(request, response){
         response.render('list', {
+          // title: [`${result[0]['title']}`,`${result[1]['title']}`,`${result[2]['title']}`,`${result[3]['title']}`],
+          // description: [`${result[0]['description']}`,`${result[1]['description']}`,`${result[2]['description']}`,`${result[3]['description']}`],
+          // url: [`${result[0]['url']}`,`${result[1]['url']}`,`${result[2]['url']}`,`${result[3]['url']}`],
+          // result: [`${result[0]['url']}`,`${result[1]['url']}`,`${result[2]['url']}`,`${result[3]['url']}`,]
           title: [`${result[0]['title']}`,`${result[1]['title']}`,`${result[2]['title']}`,`${result[3]['title']}`,`${result[4]['title']}`,`${result[5]['title']}`,`${result[6]['title']}`,`${result[7]['title']}`,`${result[8]['title']}`,`${result[9]['title']}`,`${result[10]['title']}`,`${result[11]['title']}`,`${result[12]['title']}`,`${result[13]['title']}`,`${result[14]['title']}`,`${result[15]['title']}`,`${result[16]['title']}`,`${result[17]['title']}`,`${result[18]['title']}`,`${result[19]['title']}`,`${result[20]['title']}`,`${result[21]['title']}`,`${result[22]['title']}`,`${result[23]['title']}`,`${result[24]['title']}`,`${result[25]['title']}`,`${result[26]['title']}`,`${result[27]['title']}`,`${result[28]['title']}`,`${result[29]['title']}`,`${result[30]['title']}`,`${result[31]['title']}`,`${result[32]['title']}`,`${result[33]['title']}`,`${result[34]['title']}`,`${result[35]['title']}`,`${result[36]['title']}`,`${result[37]['title']}`,`${result[38]['title']}`,`${result[39]['title']}`,`${result[40]['title']}`,`${result[41]['title']}`,`${result[42]['title']}`,`${result[43]['title']}`,`${result[44]['title']}`,`${result[45]['title']}`,`${result[46]['title']}`,`${result[47]['title']}`,`${result[48]['title']}`,`${result[49]['title']}`,`${result[50]['title']}`,`${result[51]['title']}`,`${result[52]['title']}`,`${result[53]['title']}`,`${result[54]['title']}`,`${result[55]['title']}`,`${result[56]['title']}`,`${result[57]['title']}`,`${result[58]['title']}`,`${result[59]['title']}`,`${result[60]['title']}`,`${result[61]['title']}`,`${result[62]['title']}`],
           description: [`${result[0]['description']}`,`${result[1]['description']}`,`${result[2]['description']}`, `${result[3]['description']}`,
           `${result[4]['description']}`,`${result[5]['description']}`,`${result[6]['description']}`,`${result[7]['description']}`,`${result[8]['description']}`,`${result[9]['description']}`,`${result[10]['description']}`,`${result[11]['description']}`,`${result[12]['description']}`,`${result[13]['description']}`,`${result[14]['description']}`,`${result[15]['description']}`,`${result[16]['description']}`,`${result[17]['description']}`,`${result[18]['description']}`,`${result[19]['description']}`,`${result[20]['description']}`,`${result[21]['description']}`,`${result[22]['description']}`,`${result[23]['description']}`,`${result[24]['description']}`,`${result[25]['description']}`,`${result[26]['description']}`,`${result[27]['description']}`,`${result[28]['description']}`,`${result[29]['description']}`,`${result[30]['description']}`,`${result[31]['description']}`,`${result[32]['description']}`,`${result[33]['description']}`,`${result[34]['description']}`,`${result[35]['description']}`,`${result[36]['description']}`,`${result[37]['description']}`,`${result[38]['description']}`,`${result[39]['description']}`,`${result[40]['description']}`,`${result[41]['description']}`,`${result[42]['description']}`,`${result[43]['description']}`,`${result[44]['description']}`,`${result[45]['description']}`,`${result[46]['description']}`,`${result[47]['description']}`,`${result[48]['description']}`,`${result[49]['description']}`,`${result[50]['description']}`,`${result[51]['description']}`,`${result[52]['description']}`,`${result[53]['description']}`,`${result[54]['description']}`,`${result[55]['description']}`,`${result[56]['description']}`,`${result[57]['description']}`,`${result[58]['description']}`,`${result[59]['description']}`,`${result[60]['description']}`,`${result[61]['description']}`,`${result[62]['description']}`],
@@ -73,7 +437,7 @@ connection.query(query,(err,result,field)=>{
           result: [`${result}`]
         });
       });
-
+};
       connection.end(err=>{
         if(err){
           return err;
@@ -83,55 +447,6 @@ connection.query(query,(err,result,field)=>{
         }
       });
 
-    })//app.use
-    // });//posts
-    // const linkList=result[oj]['url'];
-  }//for
-  // console.log(linkList);
-
-  // const tablePost=result;
-});
-// console.log(tablePost);
-connection.end(err=>{
-  if(err){
-    return err;
-    console.log('err');
-  }else{
-    console.log('database--- closed');
-  }
-});
-
-
-
-// app.post("/nodejs/", urlencodedParser, function (request, response) {
-//     if(!request.body) return response.sendStatus(400);
-//     console.log(request.body);
-//     response.send(`${request.body.userName} - ${request.body.userAge}`);
-// });
-
-app.set('view engine', 'ejs');
- 
-app.use("/nodejs/kontakt", function(request, response){
-  response.render('contact', {
-      title: 'Мои контакты',
-      name: 'Amir',
-      emailsVisible: true,
-      emails: ['nasoberu@nasobe.ru', 'chikchicy@gmail.com'],
-      phone: '+79528885656',
-    })
-});
-
-app.use("/nodejs/about", function(request, response){
-    response.render('about', {
-      title: 'about',
-  text: 'Настоящая веб мастерская имени барона сайтоверстаузена aand with a real super hero'
-    });
-});
-app.get("/nodejs/", function(request, response){
-    response.sendFile(__dirname + "/site/index.html");
-});
-app.get("/nodejs/contact", function(request, response){
-    response.sendFile(__dirname + "/site/contact.html");
-});
-// начинаем прослушивать подключения на 3000 порту
-app.listen(3000);
+    })//connerction
+  // }//for
+  app.listen(port);

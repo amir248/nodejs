@@ -13,6 +13,14 @@
         border-radius:5px;
       }
     </style>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LftiT8jAAAAANlpgupHL7RUnE6rYoZctoAmo9Vh"></script>
+<script>
+grecaptcha.enterprise.ready(function() {
+    grecaptcha.enterprise.execute('6LftiT8jAAAAANlpgupHL7RUnE6rYoZctoAmo9Vh', {action: 'login'}).then(function(token) {
+       ...
+    });
+});
+</script>
   </head>
   <body>
   <main>
