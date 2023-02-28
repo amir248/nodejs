@@ -14,9 +14,9 @@ const pathS='new';
 const port=3000;
 
 const hosT='localhost';
-const logiN='debian-sys-maint';
+const logiN='root';
 const databasE='nasoberu_nasite';
-const passworD='vmHrqP8Ixuf0fDGt';
+const passworD='amir';
 
 // debian-sys-maint',
 // database: 'nasoberu_nasite',
