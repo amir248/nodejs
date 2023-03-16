@@ -10,13 +10,15 @@ const bodyParser=require('body-parser');
 
 //Порт и пути для работы на всех машинах.
 const pathS='nodejs';
-const port=3003;
+const port=3001;
 
 const hosT='localhost';
-const logiN='debian-sys-maint';
-const databasE='nasoberu_nasite';
-const passworD='vmHrqP8Ixuf0fDGt';
-
+const logiN='root';
+//debian-sys-maint
+const databasE='phpmyadmin';
+//nasoberu_nasite
+const passworD='password';
+//vmHrqP8Ixuf0fDGt
 // debian-sys-maint',
 // database: 'nasoberu_nasite',
 // password: 'vmHrqP8Ixuf0fDGt
