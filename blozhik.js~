@@ -75,7 +75,25 @@ for(let oj=0;oj<results.length;oj++){
 });//connection
 
 //REQUIRE-REQUEST FILE-----------------------
+'use strict';
 
+
+let databaset = {
+    name: 'Mike',
+    age: 23,
+    gender: 'Male',
+    department: 'English',
+    car: 'Honda',
+    hero: "Amir"
+};
+
+// let dat = {
+//     name: 'Mike',
+//     age: 23,
+//     gender: 'Male',
+//     department: 'English',
+//     car: 'Honda'
+// };
 // let data=JSON.stringify(dat);
 // fs.readFileSync('title.json', data);
 // let titleJSONparse=JSON.parse(titleJSON);
@@ -87,41 +105,39 @@ connection.query(okcap, function(err, result) {
 // console.log(result['title']);
 
   for(let oj=0;oj<result.length;oj++){
-
+  }
     // if(result.length>)
     fs.stat("title.json",(err,stats)=>{
       if(err){
         //result[`${oj}`]['title']
-        let data = JSON.stringify(result[`${oj}`]['title']);
-        fs.appendFileSync('title.json', data+',');
+        let data = JSON.stringify(result);
+        fs.appendFileSync('title.json', data);
         console.log(err);
       }else{
         // let req=require('./title.json');
         // console.log(req);
+        console.log('YesFile'+' -'+ 'req' );
+        // 'use strict';
+        // let jsonData = require('./student.json');
+        let jsonData= fs.readFileSync('title.json','utf8');
+        // let onK=JSON.parse(jsonData);
+        // console.log(jsonData+ " _ "+'onK[7]');
       }
     })
-  }//for
-  console.log('YesFile'+' -'+ 'req' );
-  let jsonData= fs.readFileSync('title.json','utf8');
-  // let onK=JSON.parse(jsonData);
-  console.log(jsonData+ " _ "+'onK[7]');
     // console.log(data);
     // fs.readFile('title.json', "utf-8", function(error,dta){
     //   if(error)throw error;
     // });
-    // let fileContent = fs.readFileSync('title.json', "utf8");
-    // const jsonText = JSON.parse(fileContent);
-    // // console.log(jsonText.length);
-    // for(let k=0;k<jsonText.length;k++){
-    //   console.log(jsonText[k].title);
-    //   const okidoki= jsonText[k].title;
-    //   console.log(okidoki);
-    // }
+    let fileContent = fs.readFileSync('title.json', "utf8");
+    const jsonText = JSON.parse(fileContent);
+    console.log(fileContent[3]);
+    console.log(jsonText[17].title);
     // console.log(result[1].id+"_"+titleJSONparse.title);
     // console.log(result[oj]['title']);
     // console.log(rows.title);
     // console.log(rows['title'][oj]);
     // }
+
       app.use("/"+`${pathS}`+"/", function(request, response){
         response.render('list', {
 
