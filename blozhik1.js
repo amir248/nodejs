@@ -108,6 +108,7 @@ connection.query(okcap, function(err, result) {
         //             let onK=JSON.parse(jsonData);
       }
     });
+
     fs.stat("description.json",(err,stats)=>{
       if(err){
         //result[`${oj}`]['title']
@@ -132,101 +133,26 @@ connection.query(okcap, function(err, result) {
       }
     });
 
-    //DROP---------------------------------------------
-    let tit;
-    fs.stat("title.json",(err,stats)=>{
-      if(err){
-        console.log(err);
-        tit=false;
-      }else{
-        titleReturn();
-        console.log('TITLE');
-        tit=true;
-      }
-    });
-    fs.stat("description.json",(err,stats)=>{
-      if(err){
-        console.log(err);
+    setTimeout(()=>{ // выровнять порядок щоб небыло ошибок!
+      //TITLE
+      let fileContent = fs.readFileSync('title.json', "utf8");
+      let finalFantasy = fs.writeFileSync('new.json', "{\n"+"\"title\":"+" ["+fileContent+"\" \""+" ]"+" \n}" );
+      let writeFile=fs.readFileSync('new.json',"utf8");
+      let newTitle=JSON.parse(writeFile);
 
-      }else{
-        descriptionReturn();
-        console.log('DESCRIPTION');
-      }
-    });
-    fs.stat("url.json",(err,stats)=>{
-      if(err){
-        console.log(err);
-      }else{
-        urlReturn();
-      }
-    });
-    //TITLE
-    let fileContent = fs.readFileSync('title.json', "utf8");
-    let finalFantasy = fs.writeFileSync('new.json', "{\n"+"\"title\":"+" ["+fileContent+"\" \""+" ]"+" \n}" );
-    let writeFile=fs.readFileSync('new.json',"utf8");
-    let newTitle=JSON.parse(writeFile);
-    if(tit===true){
-      console.log(true);
-      let fileContent = fs.readFileSync('title.json', "utf8");
-      let finalFantasy = fs.writeFileSync('new.json', "{\n"+"\"title\":"+" ["+fileContent+"\" \""+" ]"+" \n}" );
-      let writeFile=fs.readFileSync('new.json',"utf8");
-      let newTitle=JSON.parse(writeFile);
-    }else{
-      console.log(false);
-      let fileContent = fs.readFileSync('title.json', "utf8");
-      let finalFantasy = fs.writeFileSync('new.json', "{\n"+"\"title\":"+" ["+fileContent+"\" \""+" ]"+" \n}" );
-      let writeFile=fs.readFileSync('new.json',"utf8");
-      let newTitle=JSON.parse(writeFile);
-    }
-    function titleReturn(){
-      let fileContent = fs.readFileSync('title.json', "utf8");
-      let finalFantasy = fs.writeFileSync('new.json', "{\n"+"\"title\":"+" ["+fileContent+"\" \""+" ]"+" \n}" );
-      let writeFile=fs.readFileSync('new.json',"utf8");
-      let newTitle=JSON.parse(writeFile);
-    }
-    // if(newTitle==='undefined'){
-    //   console.log(undefined);
-    // }else{
-    //   console.log('else');
-    //   titleReturn();
-    // }
-
-    //DESCRIPTION
-    let fileContentDesc = fs.readFileSync('description.json', "utf8");
-    let finalFantasyDesc = fs.writeFileSync('newDescription.json', "{\n"+"\"description\":"+" ["+fileContentDesc+"\" \""+" ]"+" \n}" );
-    let writeFileDesc=fs.readFileSync('newDescription.json',"utf8");
-    let newDescription=JSON.parse(writeFileDesc);
-    function descriptionReturn(){
+      //DESCRIPTION
       let fileContentDesc = fs.readFileSync('description.json', "utf8");
       let finalFantasyDesc = fs.writeFileSync('newDescription.json', "{\n"+"\"description\":"+" ["+fileContentDesc+"\" \""+" ]"+" \n}" );
       let writeFileDesc=fs.readFileSync('newDescription.json',"utf8");
       let newDescription=JSON.parse(writeFileDesc);
-    }
-    // if(newDescription==='undefined'){
-    //   console.log(undefined);
-    // }else{
-    //   console.log('elseDescription');
-    //   descriptionReturn();
-    // }
 
-    //URL
-    let fileContentUrl = fs.readFileSync('url.json', "utf8");
-    let finalFantasyUrl = fs.writeFileSync('newUrl.json', "{\n"+"\"url\":"+" ["+fileContentUrl+"\" \""+" ]"+" \n}" );
-    let writeFileUrl=fs.readFileSync('newUrl.json',"utf8");
-    let newUrl=JSON.parse(writeFileUrl);
-    function urlReturn(){
+      //URL
       let fileContentUrl = fs.readFileSync('url.json', "utf8");
       let finalFantasyUrl = fs.writeFileSync('newUrl.json', "{\n"+"\"url\":"+" ["+fileContentUrl+"\" \""+" ]"+" \n}" );
       let writeFileUrl=fs.readFileSync('newUrl.json',"utf8");
       let newUrl=JSON.parse(writeFileUrl);
-    }
-    // if(newUrl==='undefined'){
-    //   console.log(undefined);
-    // }else{
-    //   console.log('elseURL');
-    //   urlReturn();
-    // }
-    console.log(newTitle.title.length);
+
+      console.log(newTitle.title.length+"_ Поста в странице.");
       app.use("/"+`${pathS}`+"/", function(request, response){
         response.render('list', {
           title: newTitle.title,
@@ -235,6 +161,8 @@ connection.query(okcap, function(err, result) {
           result: [`${result.length}`]
         });
       });
+
+    },100);
 // };//for
       connection.end(err=>{
         if(err){
