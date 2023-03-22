@@ -19,7 +19,7 @@ const passworD='password';
 // debian-sys-maint',
 // database: 'nasoberu_nasite',
 // password: 'vmHrqP8Ixuf0fDGt
-
+// ]!fzWSRx4z6H.J.e
 console.log(__dirname);
 
 
