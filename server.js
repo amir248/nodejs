@@ -13,11 +13,11 @@ const pathS='nodejs';
 const port=3001;
 
 const hosT='localhost';
-const logiN='root';
+const logiN='debian-sys-maint';
 //debian-sys-maint
-const databasE='phpmyadmin';
+const databasE='nasoberu_nasite';
 //nasoberu_nasite
-const passworD='password';
+const passworD='vmHrqP8Ixuf0fDGt';
 //vmHrqP8Ixuf0fDGt
 // debian-sys-maint',
 // database: 'nasoberu_nasite',
@@ -210,8 +210,7 @@ app.get('/'+`${pathS}`+'/register', UrlencodedParser, function (
 });
 
 app.post('/'+`${pathS}`+'/register', UrlencodedParser, function (
-  request,
-  response
+  request,response
 ) {
   // if (!request.body) return response.sendStatus(400)
   // console.log(request.body);

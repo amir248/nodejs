@@ -8,8 +8,8 @@ const bodyParser=require('body-parser');
 
 
 //Порт и пути для работы на всех машинах.
-const pathS='blozhik';
-const port=3004;
+const pathS='nodejs';
+const port=3000;
 
 const hosT='localhost';
 const logiN='chikchicly';
@@ -19,7 +19,7 @@ const passworD='password';
 // debian-sys-maint',
 // database: 'nasoberu_nasite',
 // password: 'vmHrqP8Ixuf0fDGt
-// ]!fzWSRx4z6H.J.e
+
 console.log(__dirname);
 
 
@@ -28,6 +28,15 @@ app.use(express.static(path.join(__dirname, 'views')));
 app.set('view engine', 'ejs');
 const UrlencodedParser = express.urlencoded({extended: false});
 
+app.use("/"+`${pathS}`+"/contact", function(request, response){
+  response.render('contact', {
+      title: 'Мои контакты',
+      name: 'Amir',
+      emailsVisible: true,
+      emails: ['nasoberu@nasobe.ru', 'chikchicy@gmail.com'],
+      phone: '+79528885656',
+    })
+});
 
 app.use("/"+`${pathS}`+"/about", function(request, response){
   response.render('about', {
@@ -85,71 +94,111 @@ let okcap = "SELECT * FROM `article`";
 connection.query(okcap, function(err, result) {
     if(err) console.log(err);
 // console.log(result['title']);
+    // Число постов больше в выборке бд, потому что изворачивался как мог.
+    fs.stat('txt_json/new.json',(error)=>{
+      if(error){
+        console.log("file non");
+        return;
+      }else{
+        let readCout=fs.readFileSync('txt_json/new.json','utf8');
+        let readJson=JSON.parse(readCout);
+        console.log(readJson.title.length-1);
+        console.log(result.length);
 
-    // if(result.length>)
-    fs.stat("title.json",(err,stats)=>{
-      if(err){
-        //result[`${oj}`]['title']
-        for(let oj=0;oj<result.length;oj++){
-          // console.log(onK[oj].title+ " _ "+'onK['+oj+']');
-          // console.log(onK[oj]['description']+ " _ "+'onK['+oj+']');
-          let data = JSON.stringify(result[`${oj}`]['title']);
-          fs.appendFileSync('title.json', data+",");
-        }//for
-        // console.log(data);
-        console.log(err);
-      }else{
-        // let req=require('./title.json');
-        // console.log(req);
-        console.log('YesFile1'+' -'+ 'req' );
-        // 'use strict';
-        // let jsonData = require('./student.json');
-        //             let jsonData= fs.readFileSync('title.json','utf8');
-        //             let onK=JSON.parse(jsonData);
+        if(result.length<readJson.title.length-1||result.length>readJson.title.length-1){
+          fs.unlink('txt_json/description.json',err=>{
+            if(err) throw err;
+            console.log('File delet');
+          });
+          fs.unlink('txt_json/new.json',err=>{
+            if(err) throw err;
+            console.log('File delet');
+            // Создание файлов в папку txt_json
+            fs.stat("txt_json/title.json",(err,stats)=>{
+              if(err){
+                //result[`${oj}`]['title']
+                for(let oj=0;oj<result.length;oj++){
+                  // console.log(onK[oj].title+ " _ "+'onK['+oj+']');
+                  // console.log(onK[oj]['description']+ " _ "+'onK['+oj+']');
+                  let data = JSON.stringify(result[`${oj}`]['title']);
+                  fs.appendFileSync('txt_json/title.json', data+",");
+                }//for
+                // console.log(data);
+                console.log(err);
+              }else{
+                // let req=require('./title.json');
+                // console.log(req);
+                console.log('YesFile1'+' -'+ 'req' );
+                // 'use strict';
+                // let jsonData = require('./student.json');
+                //             let jsonData= fs.readFileSync('title.json','utf8');
+                //             let onK=JSON.parse(jsonData);
+              }
+            });
+
+            fs.stat("txt_json/description.json",(err,stats)=>{
+              if(err){
+                //result[`${oj}`]['title']
+                for(let oj=0;oj<result.length;oj++){
+                  let dataDes = JSON.stringify(result[`${oj}`]['description']);
+                  fs.appendFileSync('txt_json/description.json', dataDes+",");
+                }//for
+                console.log(err);
+              }else{
+                console.log('YesFile22222222'+' -'+ 'req' );
+              }
+            });
+            fs.stat("txt_json/url.json",(err,stats)=>{
+              if(err){
+                for(let oj=0;oj<result.length;oj++){
+                  let dataUrl = JSON.stringify(result[`${oj}`]['url']);
+                  fs.appendFileSync('txt_json/url.json', dataUrl+",");
+                }//for
+                console.log(err);
+              }else{
+                console.log('Yes33333333333'+' -'+ 'req' );
+              }
+            });
+          });
+          fs.unlink('txt_json/newDescription.json',err=>{
+            if(err) throw err;
+            console.log('File delet');
+          });
+          fs.unlink('txt_json/newUrl.json',err=>{
+            if(err) throw err;
+            console.log('File delet');
+          });
+          fs.unlink('txt_json/title.json',err=>{
+            if(err) throw err;
+            console.log('File delet');
+          });
+          fs.unlink('txt_json/url.json',err=>{
+            if(err) throw err;
+            console.log('File delet');
+          });
+          console.log('unlink '+result.length+"_"+readJson.title.length);
+        }
       }
     });
 
-    fs.stat("description.json",(err,stats)=>{
-      if(err){
-        //result[`${oj}`]['title']
-        for(let oj=0;oj<result.length;oj++){
-          let dataDes = JSON.stringify(result[`${oj}`]['description']);
-          fs.appendFileSync('description.json', dataDes+",");
-        }//for
-        console.log(err);
-      }else{
-        console.log('YesFile22222222'+' -'+ 'req' );
-      }
-    });
-    fs.stat("url.json",(err,stats)=>{
-      if(err){
-        for(let oj=0;oj<result.length;oj++){
-          let dataUrl = JSON.stringify(result[`${oj}`]['url']);
-          fs.appendFileSync('url.json', dataUrl+",");
-        }//for
-        console.log(err);
-      }else{
-        console.log('Yes33333333333'+' -'+ 'req' );
-      }
-    });
 
     setTimeout(()=>{ // выровнять порядок щоб небыло ошибок!
       //TITLE
-      let fileContent = fs.readFileSync('title.json', "utf8");
-      let finalFantasy = fs.writeFileSync('new.json', "{\n"+"\"title\":"+" ["+fileContent+"\" \""+" ]"+" \n}" );
-      let writeFile=fs.readFileSync('new.json',"utf8");
+      let fileContent = fs.readFileSync('txt_json/title.json', "utf8");
+      let finalFantasy = fs.writeFileSync('txt_json/new.json', "{\n"+"\"title\":"+" ["+fileContent+"\" \""+" ]"+" \n}" );
+      let writeFile=fs.readFileSync('txt_json/new.json',"utf8");
       let newTitle=JSON.parse(writeFile);
 
       //DESCRIPTION
-      let fileContentDesc = fs.readFileSync('description.json', "utf8");
-      let finalFantasyDesc = fs.writeFileSync('newDescription.json', "{\n"+"\"description\":"+" ["+fileContentDesc+"\" \""+" ]"+" \n}" );
-      let writeFileDesc=fs.readFileSync('newDescription.json',"utf8");
+      let fileContentDesc = fs.readFileSync('txt_json/description.json', "utf8");
+      let finalFantasyDesc = fs.writeFileSync('txt_json/newDescription.json', "{\n"+"\"description\":"+" ["+fileContentDesc+"\" \""+" ]"+" \n}" );
+      let writeFileDesc=fs.readFileSync('txt_json/newDescription.json',"utf8");
       let newDescription=JSON.parse(writeFileDesc);
 
       //URL
-      let fileContentUrl = fs.readFileSync('url.json', "utf8");
-      let finalFantasyUrl = fs.writeFileSync('newUrl.json', "{\n"+"\"url\":"+" ["+fileContentUrl+"\" \""+" ]"+" \n}" );
-      let writeFileUrl=fs.readFileSync('newUrl.json',"utf8");
+      let fileContentUrl = fs.readFileSync('txt_json/url.json', "utf8");
+      let finalFantasyUrl = fs.writeFileSync('txt_json/newUrl.json', "{\n"+"\"url\":"+" ["+fileContentUrl+"\" \""+" ]"+" \n}" );
+      let writeFileUrl=fs.readFileSync('txt_json/newUrl.json',"utf8");
       let newUrl=JSON.parse(writeFileUrl);
 
       console.log(newTitle.title.length+"_ Поста в странице.");
@@ -172,7 +221,7 @@ connection.query(okcap, function(err, result) {
           console.log('database--- closed');
         }
       });
-
     })//connerction
 
-  app.listen(port);
+
+app.listen(port);
