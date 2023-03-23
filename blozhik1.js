@@ -14,7 +14,7 @@ const port=3000;
 const hosT='localhost';
 const logiN='chikchicly';
 const databasE='nasoberu_nasite';
-const passworD='password';
+const passworD='AfmxD!XnlST[r0B9';
 
 // debian-sys-maint',
 // database: 'nasoberu_nasite',
