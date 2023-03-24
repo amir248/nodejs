@@ -98,6 +98,15 @@ connection.query(okcap, function(err, result) {
     fs.stat('txt_json/new.json',(error)=>{
       if(error){
         console.log("file non");
+        for(let oj=0;oj<result.length;oj++){
+          //файлы для первой загрузки если удалить все
+          let data = JSON.stringify(result[`${oj}`]['title']);
+          fs.appendFileSync('txt_json/title.json', data+",");
+          let dataDes = JSON.stringify(result[`${oj}`]['description']);
+          fs.appendFileSync('txt_json/description.json', dataDes+",");
+          let dataUrl = JSON.stringify(result[`${oj}`]['url']);
+          fs.appendFileSync('txt_json/url.json', dataUrl+",");
+        }//for
         return;
       }else{
         let readCout=fs.readFileSync('txt_json/new.json','utf8');
