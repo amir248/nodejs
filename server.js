@@ -10,7 +10,7 @@ const bodyParser=require('body-parser');
 
 //Порт и пути для работы на всех машинах.
 const pathS='nodejs';
-const port=3001;
+const port=3000;
 
 const hosT='localhost';
 const logiN='debian-sys-maint';
